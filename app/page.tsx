@@ -1,3 +1,4 @@
+import { auth, signOut } from '@/auth';
 import { cn } from '@/lib/utils';
 import { Poppins } from 'next/font/google';
 import { Button } from '@/components/ui/button';
@@ -8,7 +9,9 @@ const font = Poppins({
   weight: ['600']
 });
 
-export default function Home() {
+export default async function Home() {
+  const session = await auth();
+
   return (
     <main className="flex h-full flex-col items-center justify-center 
     bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))]
@@ -25,9 +28,19 @@ export default function Home() {
         </p>
         <div>
           <LoginButton>
-            <Button variant="secondary" size="lg">
-              Sign In
-            </Button>
+            {session ? (
+              <form action={async () => {
+                  'use server';
+                  await signOut();
+                }} className="mt-3">
+                <Button variant="secondary" size="lg" type="submit">Sign Out</Button>
+              </form>
+            ) : (
+              <Button variant="secondary" size="lg">
+                Sign In
+              </Button>
+            )}
+
           </LoginButton>
         </div>
       </div>

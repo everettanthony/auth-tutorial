@@ -18,7 +18,7 @@ export const BackButton = ({
     return (
         <div className="flex items-center w-full gap-x-2">
             <Button
-                size="sm"
+                size="lg"
                 className="font-normal w-full"
                 variant="link"
                 onClick={clickHandler}
