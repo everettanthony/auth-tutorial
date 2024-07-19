@@ -2,7 +2,8 @@
  * An array of routes that are accesible to the public
  */
 export const publicRoutes = [
-    '/'
+    '/',
+    '/auth/new-verification'
 ];
 
 /**
