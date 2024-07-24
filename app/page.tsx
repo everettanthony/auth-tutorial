@@ -27,20 +27,10 @@ export default async function Home() {
           A simple authentication service.
         </p>
         <div>
-          <LoginButton>
-            {session ? (
-              <form action={async () => {
-                  'use server';
-                  await signOut();
-                }} className="mt-3">
-                <Button variant="secondary" size="lg" type="submit">Sign Out</Button>
-              </form>
-            ) : (
-              <Button variant="secondary" size="lg">
-                Sign In
-              </Button>
-            )}
-
+          <LoginButton asChild mode="modal">
+            <Button variant="secondary" size="lg">
+              Sign in
+            </Button>
           </LoginButton>
         </div>
       </div>
