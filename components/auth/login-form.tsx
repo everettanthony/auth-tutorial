@@ -24,6 +24,7 @@ import { ReloadIcon } from '@radix-ui/react-icons';
 
 export const LoginForm = () => {
     const searchParams = useSearchParams();
+    const callbackUrl = searchParams.get('callbackUrl');
     const urlError = searchParams.get('error') === 'OAuthAccountNotLinked'
         ? 'This email is already in use with a different provider'
         : '';
@@ -43,7 +44,7 @@ export const LoginForm = () => {
         setError('');
 
         startTransition(() => {
-            login(values)
+            login(values, callbackUrl)
                 .then((data) => {
                     if (data?.error) {
                         form.reset();

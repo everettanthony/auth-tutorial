@@ -10,7 +10,7 @@ import { sendVerificationEmail } from '@/lib/mail';
 export const register = async (values: z.infer<typeof RegisterSchema>) => {
     const validatedFields = RegisterSchema.safeParse(values);
 
-    await new Promise((resolve) => setTimeout(resolve, 3000));
+   // await new Promise((resolve) => setTimeout(resolve, 3000));
 
     if (!validatedFields.success) {
         return { error: 'Registration failed.' }; 

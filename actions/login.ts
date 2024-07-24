@@ -11,10 +11,13 @@ import { getTwoFactorTokenByEmail } from '@/data/two-factor-token';
 import { sendVerificationEmail, sendTwoFactorTokenEmail } from '@/lib/mail';
 import { getTwoFactorConfirmationByUserId } from '@/data/two-factor-confirmation';
 
-export const login = async (values: z.infer<typeof LoginSchema>) => {
+export const login = async (
+    values: z.infer<typeof LoginSchema>,
+    callbackUrl?: string | null,
+) => {
     const validatedFields = LoginSchema.safeParse(values);
 
-    await new Promise((resolve) => setTimeout(resolve, 3000));
+    // await new Promise((resolve) => setTimeout(resolve, 3000));
 
     if (!validatedFields.success) {
         return { error: 'Login failed.' }; 
@@ -91,7 +94,7 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
         await signIn('credentials', { 
             email, 
             password,
-            redirectTo: DEFAULT_LOGIN_REDIRECT
+            redirectTo: callbackUrl || DEFAULT_LOGIN_REDIRECT,
         });
     } 
     catch (error) {
